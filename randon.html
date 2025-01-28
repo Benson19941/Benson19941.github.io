@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>隨機抽籤輪盤</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        #wheel {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            border: 10px solid #4CAF50;
+            position: relative;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+        #wheel ul {
+            padding: 0;
+            margin: 0;
+            list-style-type: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            transform-origin: center;
+            transition: transform 3s ease-out;
+        }
+        #wheel li {
+            width: 100%;
+            height: 50%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            text-align: center;
+            line-height: 2.5em;
+            font-size: 20px;
+            background-color: #f0f0f0;
+            border-bottom: 1px solid #ddd;
+        }
+        .btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>隨機抽籤輪盤</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        #wheel {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            border: 10px solid #4CAF50;
+            position: relative;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+        #wheel ul {
+            padding: 0;
+            margin: 0;
+            list-style-type: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            transform-origin: center;
+            transition: transform 3s ease-out;
+        }
+        #wheel li {
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>隨機抽籤</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 24px;
+        }
+        #status {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+        }
+        #status div {
+            margin: 0 10px;
+            font-size: 18px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>隨機抽籤系統</h1>
+    <button class="btn" id="drawButton">開始抽籤</button>
+    <div id="result"></div>
+
+    <div id="status">
+        <div>
+            <h3>已抽：</h3>
+            <ul id="drawnNumbers"></ul>
+        </div>
+        <div>
+            <h3>未抽：</h3>
+            <ul id="remainingNumbers"></ul>
+        </div>
+    </div>
+
+    <script>
+        // 初始化號碼1到34
+        let numbers = [];
+        for (let i = 1; i <= 34; i++) {
+            numbers.push(i);
+        }
+
+        let drawnNumbers = [];
+
+        // 更新畫面上的號碼列表
+        function updateLists() {
+            const drawnList = document.getElementById('drawnNumbers');
+            const remainingList = document.getElementById('remainingNumbers');
+            drawnList.innerHTML = drawnNumbers.map(num => `<li>${num}</li>`).join('');
+            remainingList.innerHTML = numbers.map(num => `<li>${num}</li>`).join('');
+        }
+
+        // 開始抽籤
+        document.getElementById('drawButton').addEventListener('click', function() {
+            if (numbers.length === 0) {
+                document.getElementById('result').innerHTML = "所有號碼都已經抽過了！";
+                document.getElementById('drawButton').disabled = true;
+                return;
+            }
+
+            // 隨機選擇號碼
+            let randomIndex = Math.floor(Math.random() * numbers.length);
+            let drawnNumber = numbers.splice(randomIndex, 1)[0]; // 移除已抽出的號碼
+
+            // 顯示抽到的號碼
+            document.getElementById('result').innerHTML = `已抽中號碼: ${drawnNumber}`;
+
+            // 添加到已抽列表
+            drawnNumbers.push(drawnNumber);
+
+            // 更新列表
+            updateLists();
+        });
+
+        // 初始化畫面
+        updateLists();
+    </script>
+
+</body>
+</html>
